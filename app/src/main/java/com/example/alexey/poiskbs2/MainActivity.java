@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.CellIdentityCdma;
+import android.telephony.CellIdentityGsm;
+import android.telephony.CellIdentityLte;
+import android.telephony.CellIdentityWcdma;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoCdma;
 import android.telephony.CellInfoGsm;
@@ -76,15 +79,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             if (c instanceof CellInfoGsm) {
                 level = ((CellInfoGsm) c).getCellSignalStrength().getLevel();
-                msg += "GSM\n";
+                CellIdentityGsm ci = ((CellInfoGsm) c).getCellIdentity();
+                msg += "GSM\t"+ci.toString()+"\t\n";
             }
             if (c instanceof CellInfoLte) {
                 level = ((CellInfoLte) c).getCellSignalStrength().getLevel();
-                msg += "LTE\n";
+                CellIdentityLte ci = ((CellInfoLte) c).getCellIdentity();
+                msg += "LTE\t"+ci.toString()+"\n";
             }
             if (c instanceof CellInfoWcdma) {
                 level = ((CellInfoWcdma) c).getCellSignalStrength().getLevel();
-                msg += "WCDMA\n";
+                CellIdentityWcdma ci = ((CellInfoWcdma) c).getCellIdentity();
+                msg += "WCDMA\t"+ci.toString()+"\n";
             }
             msg += " signal strength is " + String.valueOf(level) + "\n\n";
 
